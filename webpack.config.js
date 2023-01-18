@@ -1,11 +1,11 @@
-let mode = 'development';
+let mode = 'development'
 if (process.env.NODE_ENV === 'production') {
-    mode = 'production';
+    mode = 'production'
 }
 
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtrractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: mode,
@@ -25,8 +25,11 @@ module.exports = {
             chunks: 'all',
         },
     },
+    experiments: {
+        topLevelAwait: true,
+    },
     plugins: [
-        new MiniCssExtrractPlugin({
+        new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
         }),
         new HTMLWebpackPlugin({
@@ -61,9 +64,7 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                    mode === 'development'
-                        ? 'style-loader'
-                        : MiniCssExtrractPlugin.loader,
+                    mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader',
                     { loader: 'postcss-loader' },
                     'sass-loader',
@@ -96,4 +97,4 @@ module.exports = {
             },
         ],
     },
-};
+}

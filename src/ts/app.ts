@@ -1,15 +1,29 @@
-import API from './api'
+import { GetCarsI, GetWinnersI } from './interfaces/apiInterface'
+import { StoreI } from './interfaces/storeI'
 
 class App {
-    test: string
+    store: StoreI
 
-    constructor() {
-        this.test = 'test'
+    constructor(cars: GetCarsI, winners: GetWinnersI) {
+        this.store = {
+            carsPage: 1,
+            cars: cars.items,
+            carsCount: cars.totalCount,
+            animation: {},
+            winnersPage: 1,
+            winners: winners.items,
+            winnersCount: winners.totalCount,
+            view: 'garage',
+            sortBy: 'id',
+            sortOrder: 'ASC',
+            limit: 10,
+            isRace: false,
+        }
     }
 
     async start() {
-        this.test = 'test2'
-        await API.getCars()
+        // render
+        // listeners => controllers inside
     }
 }
 

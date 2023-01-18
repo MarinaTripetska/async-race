@@ -1,0 +1,8 @@
+export { formCreateCar } from './formCreateCar'
+export { formUpdateCar } from './formUpdateCar'
+export { garageView } from './garageView'
+export { header } from './header'
+export { message } from './message'
+export { pagination } from './pagination'
+export { raceControls } from './raceControls'
+export { winnersView } from './winnersView'

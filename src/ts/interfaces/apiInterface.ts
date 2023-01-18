@@ -1,5 +1,5 @@
 import { CarI } from './carI'
-import { WinnerAndCar } from './winnerI'
+import { WinnerAndCarI } from './winnerI'
 
 export interface GetCarsI {
     items: CarI[]
@@ -7,7 +7,7 @@ export interface GetCarsI {
 }
 
 export interface GetWinnersI {
-    items: WinnerAndCar[]
+    items: WinnerAndCarI[]
     totalCount: number
 }
 

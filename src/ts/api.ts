@@ -20,9 +20,11 @@ class API {
         return { items, totalCount }
     }
 
-    static async getCar(id: number): Promise<CarI[] | []> {
+    static async getCar(id: number): Promise<CarI> {
         const resp = await fetch(`${API.garage}/?id=${id}`)
-        return resp.json()
+
+        const carsArr: CarI[] = await resp.json()
+        return carsArr[0]
     }
 
     static async createCar(body: Pick<CarI, 'name' | 'color'>): Promise<CarI> {

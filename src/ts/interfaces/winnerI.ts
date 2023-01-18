@@ -6,6 +6,6 @@ export interface WinnerI {
     time: number
 }
 
-export interface WinnerAndCar extends WinnerI {
-    car: CarI[] | []
+export interface WinnerAndCarI extends WinnerI {
+    car: CarI
 }
