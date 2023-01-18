@@ -7,7 +7,8 @@
         "start": "set NODE_ENV=development&&webpack serve",
         "build": "set NODE_ENV=production&&webpack ",
         "dev": "set NODE_ENV=development&&webpack ",
-        "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
+        "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+        "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
     },
     "browserslist": [
         "last 2 versions",

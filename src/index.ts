@@ -1,4 +1,4 @@
-import App from './app'
+import App from './ts/app'
 import './global.css'
 
 const app = new App()
