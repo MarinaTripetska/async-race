@@ -1,8 +1,13 @@
-import { GetCarsI, GetWinnersI } from './interfaces/apiInterface'
-import { StoreI } from './interfaces/storeI'
+import { GetCarsI, GetWinnersI, Limits, StoreI } from './interfaces'
+import Listener from './listener'
+import View from './view'
 
 class App {
     store: StoreI
+
+    view: View
+
+    listener: Listener
 
     constructor(cars: GetCarsI, winners: GetWinnersI) {
         this.store = {
@@ -16,14 +21,19 @@ class App {
             view: 'garage',
             sortBy: 'id',
             sortOrder: 'ASC',
-            limit: 10,
+            limit: Limits.CarsOnPage,
             isRace: false,
         }
+        this.view = new View(this.store)
+        this.listener = new Listener(this.store)
     }
 
     async start() {
-        // render
-        // listeners => controllers inside
+        this.view.render()
+        this.listener.addEventListeners()
+        // ?
+        // window.addEventListener('click', () => console.log(this.store))
+        // ?
     }
 }
 

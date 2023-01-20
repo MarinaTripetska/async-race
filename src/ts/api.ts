@@ -1,7 +1,12 @@
-import { DriveI, GetCarsI, GetWinnersI, StartStopI } from './interfaces/apiInterface'
-import { CarI } from './interfaces/carI'
-import EngineStatus from './interfaces/engineStatus'
-import { WinnerI } from './interfaces/winnerI'
+import {
+    CarI,
+    DriveI,
+    EngineStatus,
+    GetCarsI,
+    GetWinnersI,
+    StartStopI,
+    WinnerI,
+} from './interfaces'
 import utils from './utils'
 
 class API {

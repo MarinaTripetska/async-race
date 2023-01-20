@@ -3,6 +3,7 @@ import { garageView, header, pagination, winnersView } from './templates'
 
 class View {
     store: StoreI
+
     root: HTMLDivElement
 
     constructor(store: StoreI) {
@@ -11,16 +12,14 @@ class View {
         this.root.classList.add('container')
     }
 
-    render = async () => {
+    render = () => {
         const html = `
             ${header()}
             <div class="wrapper">
                 ${garageView(this.store)}
                 ${winnersView(this.store)}
             </div>
-            ${pagination()}
-            `
-
+            ${pagination()}`
         this.root.innerHTML = html
         document.body.append(this.root)
     }
