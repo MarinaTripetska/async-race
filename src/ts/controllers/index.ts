@@ -1,2 +1,5 @@
 export { updateStateWinners } from './updateStateWinners'
 export { getCurrentPage } from './getCurrentPage'
+export { startDriving } from './startDriving'
+export { updateStateGarage } from './updateStateGarage'
+export { stopDriving } from './stopDriving'

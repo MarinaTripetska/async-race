@@ -141,17 +141,32 @@ class API {
     }
 
     static async stopEngine(id: number): Promise<StartStopI> {
-        const resp = await fetch(`${API.engine}?id=${id}?status=${EngineStatus.STOP}`, {
+        const resp = await fetch(`${API.engine}?id=${id}&status=${EngineStatus.STOP}`, {
             method: 'PATCH',
         })
         return resp.json()
     }
 
     static async drive(id: number): Promise<DriveI> {
-        const res = await fetch(`${API.engine}?id=${id}&status=${EngineStatus.DRIVE}`, {
-            method: 'PATCH',
-        })
-        return res.json()
+        try {
+            const resp = await fetch(`${API.engine}?id=${id}&status=${EngineStatus.DRIVE}`, {
+                method: 'PATCH',
+            })
+            const status = resp.status
+            if (status !== 200) {
+                throw new Error(status.toString())
+            }
+            const data = resp.json()
+            return {
+                status,
+                data,
+            }
+        } catch (e) {
+            console.log('error', e)
+            return {
+                status: +(e as Error).message,
+            }
+        }
     }
 }
 

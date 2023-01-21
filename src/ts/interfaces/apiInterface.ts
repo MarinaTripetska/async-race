@@ -12,7 +12,8 @@ export interface GetWinnersI {
 }
 
 export interface DriveI {
-    success: boolean
+    status: number
+    data?: Promise<any>
 }
 
 export interface StartStopI {
