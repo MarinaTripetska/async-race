@@ -32,9 +32,6 @@ class App {
     async start() {
         this.view.render()
         this.listener.addEventListeners()
-        // ?
-        // window.addEventListener('click', () => console.log(this.store))
-        // ?
     }
 }
 

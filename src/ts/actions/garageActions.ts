@@ -1,6 +1,7 @@
 import API from '../api'
 import { startDriving, stopDriving, updateStateGarage } from '../controllers'
 import { CarI, GarageTotalTargets, StoreI } from '../interfaces'
+import { carList } from '../templates/carList'
 import utils from '../utils'
 
 class GarageActions {
@@ -13,9 +14,15 @@ class GarageActions {
     }
 
     public addListeners() {
+        this.addListenersOnCarItem()
+
+        const { generatorBtn, raceBtn, resetBtn } = utils.findRaceControlsButtons()
+        generatorBtn.addEventListener('click', (e) => this.onGeneratorClick(e, this.store))
+    }
+
+    private addListenersOnCarItem = () => {
         const { startBtnList, stopBtnList, selectCarBtnList, deleteCarBtnList } =
             utils.findCarListsButtons()
-        const { generatorBtn, raceBtn, resetBtn } = utils.findRaceControlsButtons()
 
         startBtnList.forEach((el) => {
             el.addEventListener('click', this.onStartClick)
@@ -29,7 +36,6 @@ class GarageActions {
         deleteCarBtnList.forEach((el) => {
             el.addEventListener('click', (e) => this.onDeleteClick(e, this.store))
         })
-        generatorBtn.addEventListener('click', (e) => this.onGeneratorClick(e, this.store))
     }
 
     private async onStartClick(e: MouseEvent) {
@@ -68,13 +74,15 @@ class GarageActions {
         const totalCountEl = <HTMLElement>(
             document.getElementById(`${GarageTotalTargets.TotalCount}`)
         )
+        const carsListEl = <HTMLElement>document.getElementById(`${GarageTotalTargets.GarageList}`)
 
         await API.deleteCar(id)
         await API.deleteWinner(id)
         await updateStateGarage(store)
 
         totalCountEl.textContent = `Garage (${store.carsCount} cars)`
-        carEl.remove()
+        carsListEl.innerHTML = carList(store.cars)
+        this.addListenersOnCarItem()
     }
 
     private async onGeneratorClick(e: MouseEvent, store: StoreI) {

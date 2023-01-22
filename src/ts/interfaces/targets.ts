@@ -5,6 +5,7 @@ export enum NavTargets {
 
 export enum GarageTotalTargets {
     TotalCount = 'garage-cars-count',
+    GarageList = 'garage-list',
 }
 
 export enum GarageControlsTargets {

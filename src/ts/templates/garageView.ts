@@ -18,7 +18,7 @@ export const garageView = (store: StoreI) => {
                 <div id="garage">
                     <h1 id="garage-cars-count">Garage (${store.carsCount} cars)</h1>
                     <p>Page #${store.carsPage}</p>
-                    <ul class="garage">
+                    <ul class="garage" id="garage-list">
                     ${carList(store.cars)}
                     </ul>
                 </div>
