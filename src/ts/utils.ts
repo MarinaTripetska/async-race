@@ -1,3 +1,5 @@
+import { GarageTargets, GarageUpdateTargets } from './interfaces'
+
 const getSortOrder = (sort: string, order: string) => {
     if (sort && order) {
         return `&_sort=${sort}&_order=${order}`
@@ -13,7 +15,35 @@ const findCarElem = (id: number) => {
     return { car, startButton, stopButton }
 }
 
+const findUpdateFormEl = () => {
+    const nameEl = <HTMLInputElement>document.getElementById(GarageUpdateTargets.NAME)
+    const colorEl = <HTMLInputElement>document.getElementById(GarageUpdateTargets.COLOR)
+    const submitEl = <HTMLButtonElement>document.getElementById(GarageUpdateTargets.SUBMIT)
+
+    return {
+        nameEl,
+        colorEl,
+        submitEl,
+    }
+}
+
+const findCarListsButtons = () => {
+    const startBtnList = <NodeListOf<HTMLButtonElement>>(
+        document.querySelectorAll(`.${GarageTargets.START}`)
+    )
+    const stopBtnList = <NodeListOf<HTMLButtonElement>>(
+        document.querySelectorAll(`.${GarageTargets.STOP}`)
+    )
+    const selectCarBtnList = <NodeListOf<HTMLButtonElement>>(
+        document.querySelectorAll(`.${GarageTargets.SELECT}`)
+    )
+
+    return { startBtnList, stopBtnList, selectCarBtnList }
+}
+
 export default {
     getSortOrder,
     findCarElem,
+    findUpdateFormEl,
+    findCarListsButtons,
 }

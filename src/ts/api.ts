@@ -152,11 +152,15 @@ class API {
             const resp = await fetch(`${API.engine}?id=${id}&status=${EngineStatus.DRIVE}`, {
                 method: 'PATCH',
             })
+
             const status = resp.status
+
             if (status !== 200) {
                 throw new Error(status.toString())
             }
+
             const data = resp.json()
+
             return {
                 status,
                 data,

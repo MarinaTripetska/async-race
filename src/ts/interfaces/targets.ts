@@ -12,3 +12,9 @@ export enum GarageTargets {
     RACE = 'race-button',
     RESET = 'reset-button',
 }
+
+export enum GarageUpdateTargets {
+    COLOR = 'update-color',
+    NAME = 'update-name',
+    SUBMIT = 'update-submit',
+}
