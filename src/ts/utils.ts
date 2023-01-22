@@ -1,4 +1,5 @@
-import { GarageTargets, GarageUpdateTargets } from './interfaces'
+import { marks, models } from './data'
+import { GarageControlsTargets, GarageTargets, GarageUpdateTargets } from './interfaces'
 
 const getCarIdFromElement = (el: HTMLElement, targetName: string) => +el.id.split(targetName)[1]
 
@@ -46,10 +47,44 @@ const findCarListsButtons = () => {
     return { startBtnList, stopBtnList, selectCarBtnList, deleteCarBtnList }
 }
 
+const findRaceControlsButtons = () => {
+    const generatorBtn = <HTMLButtonElement>(
+        document.getElementById(`${GarageControlsTargets.GENERATE}`)
+    )
+    const raceBtn = <HTMLButtonElement>document.getElementById(`${GarageControlsTargets.RACE}`)
+    const resetBtn = <HTMLButtonElement>document.getElementById(`${GarageControlsTargets.RESET}`)
+
+    return {
+        generatorBtn,
+        raceBtn,
+        resetBtn,
+    }
+}
+
+const getRandomName = () => {
+    const randomModel = models[Math.floor(Math.random() * models.length)]
+    const randomName = marks[Math.floor(Math.random() * marks.length)]
+    return `${randomModel} ${randomName}`
+}
+
+const getRandomColor = () => {
+    const letters = '0123456789abcdef'
+    let color: string = '#'
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * letters.length)]
+    }
+    return color
+}
+
+const generateRandomCars = (count: number = 100) =>
+    new Array(count).fill(1).map((_) => ({ name: getRandomName(), color: getRandomColor() }))
+
 export default {
     getCarIdFromElement,
     getSortOrder,
     findCarElem,
     findUpdateFormEl,
     findCarListsButtons,
+    findRaceControlsButtons,
+    generateRandomCars,
 }

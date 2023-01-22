@@ -4,8 +4,8 @@ import { carImage } from './carImage'
 export const carItem = ({ id, name, color }: CarI, isEngineActive: boolean) => {
     return `<li id="car-item${id}">
                 <div class="general-buttons">
-                    <button type="button" class="button select-button" id="select-car-${id}">Select</button>
-                    <button type="button" class="button remove-button" id="remove-car-${id}">Remove</button>
+                    <button type="button" class="select-button" id="select-car-${id}">Select</button>
+                    <button type="button" class="remove-button" id="remove-car-${id}">Remove</button>
                 </div>
 
                 <h3 class="car-name">${name}</h3>

@@ -1,7 +1,7 @@
 export const raceControls = () => {
     return `<div class="race-controls">
-                <button class="button race-button primary" id="race">Race</button>
-                <button class="button reset-button primary" id="reset">Reset</button>
-                <button class="button generator-button" id="generator">Generate cars</button>
+                <button type="button" id="race-button">Race</button>
+                <button type="button" id="reset-button">Reset</button>
+                <button type="button" id="generator-button">Generate cars</button>
             </div>`
 }

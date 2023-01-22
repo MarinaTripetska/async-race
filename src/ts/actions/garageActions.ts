@@ -15,6 +15,7 @@ class GarageActions {
     public addListeners() {
         const { startBtnList, stopBtnList, selectCarBtnList, deleteCarBtnList } =
             utils.findCarListsButtons()
+        const { generatorBtn, raceBtn, resetBtn } = utils.findRaceControlsButtons()
 
         startBtnList.forEach((el) => {
             el.addEventListener('click', this.onStartClick)
@@ -23,11 +24,12 @@ class GarageActions {
             el.addEventListener('click', this.onStopClick)
         })
         selectCarBtnList.forEach((el) => {
-            el.addEventListener('click', this.onSelectCarClick)
+            el.addEventListener('click', this.onSelectClick)
         })
         deleteCarBtnList.forEach((el) => {
-            el.addEventListener('click', (e: MouseEvent) => this.onDeleteCarClick(e, this.store))
+            el.addEventListener('click', (e) => this.onDeleteClick(e, this.store))
         })
+        generatorBtn.addEventListener('click', (e) => this.onGeneratorClick(e, this.store))
     }
 
     private async onStartClick(e: MouseEvent) {
@@ -40,7 +42,7 @@ class GarageActions {
         await stopDriving(id)
     }
 
-    private async onSelectCarClick(e: MouseEvent) {
+    private async onSelectClick(e: MouseEvent) {
         const targetBtn = <HTMLElement>e.target
         targetBtn.textContent = `Loading...`
         const currentCarId = utils.getCarIdFromElement(targetBtn, 'select-car-')
@@ -58,7 +60,7 @@ class GarageActions {
         }
     }
 
-    private async onDeleteCarClick(e: MouseEvent, store: StoreI) {
+    private async onDeleteClick(e: MouseEvent, store: StoreI) {
         const targetBtn = <HTMLElement>e.target
         targetBtn.textContent = `Loading...`
         const id = +targetBtn.id.split('remove-car-')[1]
@@ -73,6 +75,29 @@ class GarageActions {
 
         totalCountEl.textContent = `Garage (${store.carsCount} cars)`
         carEl.remove()
+    }
+
+    private async onGeneratorClick(e: MouseEvent, store: StoreI) {
+        const targetBtn = <HTMLButtonElement>e.target
+        const totalCountEl = <HTMLElement>(
+            document.getElementById(`${GarageTotalTargets.TotalCount}`)
+        )
+
+        targetBtn.textContent = `Generating cars...`
+        targetBtn.disabled = true
+
+        const cars = utils.generateRandomCars()
+
+        await Promise.all(cars.map(async (car) => await API.createCar(car)))
+        await updateStateGarage(store)
+        const { items, totalCount } = await API.getCars(1)
+
+        this.store.cars = items
+        this.store.carsCount = totalCount
+
+        targetBtn.textContent = `Generate cars`
+        targetBtn.disabled = false
+        totalCountEl.textContent = `Garage (${store.carsCount} cars)`
     }
 }
 
