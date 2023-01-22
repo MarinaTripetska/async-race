@@ -24,6 +24,7 @@ class App {
             limit: Limits.CarsOnPage,
             isRace: false,
         }
+
         this.view = new View(this.store)
         this.listener = new Listener(this.store)
     }

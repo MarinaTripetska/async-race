@@ -1,5 +1,7 @@
 import { GarageTargets, GarageUpdateTargets } from './interfaces'
 
+const getCarIdFromElement = (el: HTMLElement, targetName: string) => +el.id.split(targetName)[1]
+
 const getSortOrder = (sort: string, order: string) => {
     if (sort && order) {
         return `&_sort=${sort}&_order=${order}`
@@ -37,11 +39,15 @@ const findCarListsButtons = () => {
     const selectCarBtnList = <NodeListOf<HTMLButtonElement>>(
         document.querySelectorAll(`.${GarageTargets.SELECT}`)
     )
+    const deleteCarBtnList = <NodeListOf<HTMLButtonElement>>(
+        document.querySelectorAll(`.${GarageTargets.REMOVE}`)
+    )
 
-    return { startBtnList, stopBtnList, selectCarBtnList }
+    return { startBtnList, stopBtnList, selectCarBtnList, deleteCarBtnList }
 }
 
 export default {
+    getCarIdFromElement,
     getSortOrder,
     findCarElem,
     findUpdateFormEl,

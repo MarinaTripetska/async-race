@@ -8,6 +8,7 @@ class View {
 
     constructor(store: StoreI) {
         this.store = { ...store }
+
         this.root = document.createElement('div')
         this.root.classList.add('container')
     }

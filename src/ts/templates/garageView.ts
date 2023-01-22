@@ -1,5 +1,6 @@
 import { StoreI } from '../interfaces/storeI'
 import { carItem } from './carItem'
+import { carList } from './carList'
 import { formCreateCar } from './formCreateCar'
 import { formUpdateCar } from './formUpdateCar'
 import { message } from './message'
@@ -15,10 +16,10 @@ export const garageView = (store: StoreI) => {
                 ${raceControls()}
 
                 <div id="garage">
-                    <h1>Garage (${store.carsCount} cars)</h1>
+                    <h1 id="garage-cars-count">Garage (${store.carsCount} cars)</h1>
                     <p>Page #${store.carsPage}</p>
                     <ul class="garage">
-                        ${store.cars.map((car) => carItem(car, false)).join('')}
+                    ${carList(store.cars)}
                     </ul>
                 </div>
                 ${message()}
