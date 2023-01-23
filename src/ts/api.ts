@@ -54,9 +54,16 @@ class API {
         return resp.json()
     }
 
-    static async deleteCar(id: number): Promise<{}> {
-        const resp = await fetch(`${API.garage}/${id}`, { method: 'DELETE' })
-        return resp.json()
+    static async deleteCar(id: number): Promise<{} | void> {
+        try {
+            const resp = await fetch(`${API.garage}/${id}`, { method: 'DELETE' })
+            if (resp.status === 404) {
+                throw new Error("This winner doesn't exist")
+            }
+            return resp.json()
+        } catch (error) {
+            console.log((error as Error).message)
+        }
     }
 
     static async getWinners(page = 1, limit = 10, sort = '', order = ''): Promise<GetWinnersI> {
@@ -82,12 +89,13 @@ class API {
         return resp.json()
     }
 
-    private static async getWinnerStatus(id: number) {
+    private static async getWinnerStatus(id: number): Promise<number> {
         const resp = await fetch(`${API.winners}/${id}`)
         return resp.status
     }
 
     private static async createWinner(body: WinnerI): Promise<WinnerI> {
+      
         const resp = await fetch(API.winners, {
             method: 'POST',
             body: JSON.stringify(body),
@@ -102,6 +110,7 @@ class API {
         id: number,
         body: Pick<WinnerI, 'wins' | 'time'>
     ): Promise<WinnerI> {
+     
         const resp = await fetch(`${API.winners}/${id}`, {
             method: 'PUT',
             body: JSON.stringify(body),
@@ -115,6 +124,7 @@ class API {
     static async saveWinner(id: number, time: number): Promise<WinnerI> {
         const winnerStatus = await API.getWinnerStatus(id)
         if (winnerStatus === 404) {
+ 
             return API.createWinner({
                 id,
                 wins: 1,
@@ -128,9 +138,16 @@ class API {
         })
     }
 
-    static async deleteWinner(id: number): Promise<{}> {
-        const resp = await fetch(`${API.winners}/${id}`, { method: 'DELETE' })
-        return resp.json()
+    static async deleteWinner(id: number): Promise<{} | void> {
+        try {
+            const resp = await fetch(`${API.winners}/${id}`, { method: 'DELETE' })
+            if (resp.status === 404) {
+                throw new Error("This winner doesn't exist")
+            }
+            return resp.json()
+        } catch (error) {
+            console.log((error as Error).message)
+        }
     }
 
     static async startEngine(id: number): Promise<StartStopI> {

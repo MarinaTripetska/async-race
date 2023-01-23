@@ -1,4 +1,5 @@
 import { StoreI } from '../interfaces/storeI'
+import utils from '../utils'
 
 export const winnersContent = ({
     winnersCount,
@@ -33,7 +34,7 @@ export const winnersContent = ({
                                 <td>${i + 1}</td>
                                 <td>${car.name}</td>
                                 <td>${wins}</td>
-                                <td>${time}</td>
+                                <td>${utils.getTimeInSeconds(time)}</td>
                             </tr>
                         `
                             )

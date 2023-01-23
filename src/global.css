@@ -138,10 +138,12 @@ TR:nth-child(3) {
     height: 50px;
     margin: 0 auto;
     z-index: 2;
-    /* background-color: moccasin; */
 }
-
-#message.visible {
+.message {
+    display: none;
+}
+.message.visible {
+    display: block;
     color: orange;
     font-size: 18px;
 }

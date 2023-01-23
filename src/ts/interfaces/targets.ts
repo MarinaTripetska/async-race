@@ -6,6 +6,7 @@ export enum NavTargets {
 export enum GarageTotalTargets {
     TotalCount = 'garage-cars-count',
     GarageList = 'garage-list',
+    Message = 'message',
 }
 
 export enum GarageControlsTargets {
@@ -14,7 +15,11 @@ export enum GarageControlsTargets {
     RESET = 'reset-button',
 }
 
-export enum GarageCreateTargets {}
+export enum GarageCreateTargets {
+    COLOR = 'create-color',
+    NAME = 'create-name',
+    SUBMIT = 'create-submit',
+}
 
 export enum GarageUpdateTargets {
     COLOR = 'update-color',

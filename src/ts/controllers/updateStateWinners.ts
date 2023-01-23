@@ -1,7 +1,6 @@
 import API from '../api'
 import { StoreI, WinnerAndCarI } from '../interfaces'
 
-// ?
 export const updateStateWinners = async (store: StoreI) => {
     const { winnersPage, limit, sortBy, sortOrder } = store
     const { items, totalCount } = await API.getWinners(winnersPage, limit, sortBy, sortOrder)
@@ -15,4 +14,3 @@ export const updateStateWinners = async (store: StoreI) => {
     // )
     // ;(<HTMLInputElement>document.getElementById('prev')).disabled = !(store.winnersPage > 1)
 }
-// ?
